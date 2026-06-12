@@ -2,15 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: backend
+  labels:
+    app: backend
 spec:
   replicas: 1
+
   selector:
     matchLabels:
       app: backend
+
   template:
     metadata:
       labels:
         app: backend
+
     spec:
       imagePullSecrets:
         - name: scw-registry-secret
@@ -18,5 +23,31 @@ spec:
       containers:
         - name: backend
           image: rg.fr-par.scw.cloud/insurance/backend:latest
+
           ports:
             - containerPort: 5000
+
+          # Resources (important en prod)
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "300m"
+              memory: "256Mi"
+
+          # Liveness probe (redémarre si KO)
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+          # Readiness probe (ready pour recevoir trafic)
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5
