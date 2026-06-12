@@ -1,0 +1,19 @@
+server:
+  replicas: 2
+
+repoServer:
+  replicas: 2
+
+controller:
+  replicas: 2
+
+redis:
+  enabled: true
+  replica:
+    replicaCount: 2
+
+global:
+  topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: ScheduleAnyway

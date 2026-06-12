@@ -1,0 +1,12 @@
+resources:
+  - ../base
+  - namespace.yaml
+
+patches:
+  - target:
+      kind: Deployment
+      name: backend
+    patch: |
+      - op: replace
+        path: /spec/replicas
+        value: 2

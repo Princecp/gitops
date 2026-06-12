@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      imagePullSecrets:
+        - name: scw-registry-secret
+
+      containers:
+        - name: backend
+          image: rg.fr-par.scw.cloud/insurance/backend:latest
+          ports:
+            - containerPort: 5000

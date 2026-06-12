@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: insurance-sandbox
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/Princecp/gitops.git
+    targetRevision: main
+    path: apps/insurance/sandbox
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: insurance-sandbox
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true

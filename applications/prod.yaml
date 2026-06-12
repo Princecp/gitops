@@ -1,0 +1,22 @@
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: insurance-prod
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/Princecp/gitops.git
+    targetRevision: main
+    path: apps/insurance/prod
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: insurance-prod
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
