@@ -4,6 +4,8 @@ metadata:
   name: traefik
   namespace: argocd
 spec:
+  project: default
+
   source:
     repoURL: https://traefik.github.io/charts
     chart: traefik
@@ -19,4 +21,6 @@ spec:
     namespace: traefik
 
   syncPolicy:
-    automated: {}
+    automated:
+      prune: true
+      selfHeal: true
