@@ -27,7 +27,7 @@ spec:
           ports:
             - containerPort: 5000
 
-          # Resources (important en prod)
+          # Resources
           resources:
             requests:
               cpu: "100m"
