@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-namespace
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/Princecp/gitops.git
+    targetRevision: main
+    path: apps/infra/cert-manager-namespace
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: cert-manager
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
