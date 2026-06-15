@@ -16,6 +16,9 @@ spec:
         deployment:
           replicas: 2
 
+        service:
+          type: LoadBalancer
+
   destination:
     server: https://kubernetes.default.svc
     namespace: traefik
