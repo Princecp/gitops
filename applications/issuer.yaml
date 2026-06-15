@@ -1,14 +1,20 @@
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
+apiVersion: argoproj.io/v1alpha1
+kind: Application
 metadata:
-  name: letsencrypt-prod
+  name: issuer
+  namespace: argocd
 spec:
-  acme:
-    email: prince.mbengue.adama@externe.maif.fr
-    server: https://acme-v02.api.letsencrypt.org/directory
-    privateKeySecretRef:
-      name: letsencrypt-prod
-    solvers:
-      - http01:
-          ingress:
-            class: traefik
+  project: default
+
+  source:
+    repoURL: https://github.com/Princecp/gitops.git
+    targetRevision: main
+    path: apps/infra/issuer
+
+  destination:
+    server: https://kubernetes.default.svc
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
