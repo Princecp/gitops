@@ -3,6 +3,9 @@ kind: Application
 metadata:
   name: cert-manager
   namespace: argocd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod 
+
 spec:
   project: default
 
