@@ -46,7 +46,7 @@ kubectl create namespace traefik
 
 ### Forcer le sync
 
-
 kubectl patch application traefik -n argocd \
   --type merge \
   -p '{"operation":{"sync":{}}}'
+
