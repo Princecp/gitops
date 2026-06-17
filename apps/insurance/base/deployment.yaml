@@ -22,7 +22,7 @@ spec:
 
       containers:
         - name: backend
-          image: rg.fr-par.scw.cloud/insurance-sandbox/backend:sandbox
+          image: rg.fr-par.scw.cloud/insurance-build/backend:build
 
           ports:
             - containerPort: 5000
